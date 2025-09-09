@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<section>
+    <h2>Submit a Claim</h2>
+    <form>
+        <input type="text" placeholder="Lecturer Name" />
+        <input type="number" placeholder="Hours Worked" />
+        <input type="number" placeholder="Hourly Rate" />
+        <input type="file"
+        <button type="button">Submit Claim</button>
+    </form>
+</section>
+
+<section>
+    <h2>Your Claims</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.ClaimID</td>
+                    <td>@claim.LecturerName</td>
+                    <td><span class="status">@claim.Status</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

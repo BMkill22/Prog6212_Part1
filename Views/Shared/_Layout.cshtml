@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Part1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Part1.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <h1>Contract Monthly Claim System</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/Lecturer">Lecturer Page</a>
+            <a href="/Manager">Manager Page</a>
+            <a href="/Claims">Claims</a>
+            <a href="/Program">Program Coordinator</a>
+        </nav>
+    </header>
+        <main>
+            @RenderBody()
+        </main>
+</body>
+</html>
