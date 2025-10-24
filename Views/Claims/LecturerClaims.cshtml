@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Part1.Models.Claim>
+@{
+    ViewBag.Title = "My Claims";
+    var email = ViewBag.FilterEmail as string ?? "";
+}
+<h2>Lecturer Claims</h2>
+
+<form method="get" class="form-inline mb-3">
+    <input type="text" name="email" class="form-control mr-2" placeholder="Filter by email" value="@email" />
+    <button class="btn btn-outline-primary">Filter</button>
+</form>
+
+<table class="table">
+    <thead><tr><th>#</th><th>Hours</th><th>Rate</th><th>Total</th><th>Status</th><th>Doc</th></tr></thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td><a href="/Claims/Details/@c.Id">@c.Id</a></td>
+                <td>@c.HoursWorked</td>
+                <td>@c.HourlyRate</td>
+                <td>@c.Total.ToString("C")</td>
+                <td>@c.Status</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(c.DocumentFileName))
+                    {
+                        <a href="/Claims/DownloadDocument?fileName=@c.DocumentFileName">Download</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

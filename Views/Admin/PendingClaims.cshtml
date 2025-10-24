@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Part1.Models.Claim>
+@{
+    ViewBag.Title = "Pending Claims";
+    var count = ViewBag.PendingCount ?? 0;
+}
+<h2>Pending Claims (@count)</h2>
+
+<table class="table">
+    <thead><tr><th>#</th><th>Lecturer</th><th>Total</th><th>Submitted</th><th>Actions</th></tr></thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.LecturerName<br /><small>@c.LecturerEmail</small></td>
+                <td>@c.Total.ToString("C")</td>
+                <td>@c.SubmittedAt.ToLocalTime().ToString("g")</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="/Admin/Approve/@c.Id">Review</a>
+                    @if (!string.IsNullOrEmpty(c.DocumentFileName))
+                    {
+                        <a class="btn btn-sm btn-link" href="/Claims/DownloadDocument?fileName=@c.DocumentFileName">Doc</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,25 @@
+﻿@model Part1.Models.Claim
+@{
+    ViewBag.Title = "Approve Claim";
+}
+<h2>Review Claim #@Model.Id</h2>
+
+<div>
+    <p><strong>Lecturer:</strong> @Model.LecturerName (@Model.LecturerEmail)</p>
+    <p><strong>Hours:</strong> @Model.HoursWorked</p>
+    <p><strong>Rate:</strong> @Model.HourlyRate</p>
+    <p><strong>Total:</strong> @Model.Total.ToString("C")</p>
+    <p><strong>Notes:</strong> @Model.Notes</p>
+    @if (!string.IsNullOrEmpty(Model.DocumentFileName))
+    {
+        <p><a href="/Claims/DownloadDocument?fileName=@Model.DocumentFileName">Open Document</a></p>
+    }
+</div>
+
+<form asp-action="ApproveConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button name="action" value="approve" class="btn btn-success">Approve</button>
+    <button name="action" value="reject" class="btn btn-danger">Reject</button>
+    <a href="/Admin/PendingClaims" class="btn btn-secondary">Back</a>
+</form>
+
