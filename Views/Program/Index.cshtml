@@ -1,37 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Part1.Models.Claim>
+
+@using Part1.Models 
+
 @{
+    ViewData["Title"] = "Approve Claims";
 }
 
-<section>
-    <h2>Pending Claims</h2>
-    <table>
-        <thead>
+<h1>Approve Claims</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Lecturer Name</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th> </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>ID</th>
-                <th>Lecturer</th>
-                <th>Hours</th>
-                <th>Rate</th>
-                <th>Status</th>
-                <th>Action</th>
+                <td>@Html.DisplayFor(modelItem => item.LecturerName)</td>
+                <td>@Html.DisplayFor(modelItem => item.HoursWorked)</td>
+                <td>@Html.DisplayFor(modelItem => item.HourlyRate)</td>
+                <td>
+                    @(((decimal)item.HoursWorked * item.HourlyRate).ToString("C"))
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td>
+                    @if (item.Status == ClaimStatus.Pending)
+                    {
+                        <form asp-action="Approve" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                        </form>
+
+                        <form asp-action="Reject" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    }
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var claim in Model)
-            {
-                <tr>
-                    <td>@claim.ClaimID</td>
-                    <td>@claim.LecturerName</td>
-                    <td>@claim.HoursWorked</td>
-                    <td>@claim.HourlyRate</td>
-                    <td>@claim.Status</td>
-                    <td>
-                        <button>Approve</button>
-                        <button>Reject</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</section>
+        }
+    </tbody>
+</table>

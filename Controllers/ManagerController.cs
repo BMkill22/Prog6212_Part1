@@ -11,7 +11,7 @@ namespace Part1.Controllers
         {
             var claims = new List<Claim>
             {
-                new Claim { ClaimID = 1, LecturerName = "Siya Khumalo", HoursWorked = 10, HourlyRate = 200, Status = "Pending"}
+                new Claim { ClaimID = 1, LecturerName = "Siya Khumalo", HoursWorked = 10, HourlyRate = 200, Status = ClaimStatus.Pending}
             };
             return View(claims);
         }

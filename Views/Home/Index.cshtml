@@ -1,8 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Home";
+    var latest = ViewBag.LatestClaims as List<Part1.Models.Claim> ?? new List<Part1.Models.Claim>();
+}
+<h2>Welcome to CMCS</h2>
+
+<p>
+    <a class="btn btn-primary" href="/Claims/Create">Submit Claim</a>
+    <a class="btn btn-secondary" href="/Claims">All Claims</a>
+    <a class="btn btn-info" href="/Admin/PendingClaims">Pending Approvals</a>
+</p>
+
+<h3>Latest Claims</h3>
+@if (!latest.Any())
+{
+    <p>No claims yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead><tr><th>#</th><th>Lecturer</th><th>Total</th><th>Status</th><th>Submitted</th></tr></thead>
+        <tbody>
+            @foreach (var c in latest)
+            {
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.LecturerName</td>
+                    <td>@(c.Total.ToString("C"))</td>
+                    <td>@c.Status</td>
+                    <td>@c.SubmittedAt.ToLocalTime().ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
-<section>
-    <h2>Welcom to my assignment</h2>
-    <p>This is the front-end prototype of the Contract Monthly Claim System.</p>
-</section>
