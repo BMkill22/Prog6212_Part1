@@ -7,27 +7,38 @@ namespace Part1.Models
     {
         public int Id { get; set; }
 
-        [Required] public string LecturerName { get; set; } = string.Empty;
-        [Required, EmailAddress] public string LecturerEmail { get; set; } = string.Empty;
+        [Required]
+        [Display(Name = "Hours Worked")]
+        [Range(0.1, 100, ErrorMessage = "Hours must be between 0.1 and 100.")]
+        public double HoursWorked { get; set; }
 
-        [Required] public double HoursWorked { get; set; }
-        [Required] public decimal HourlyRate { get; set; }
+        [Required]
+        [Display(Name = "Hourly Rate")]
+        [DataType(DataType.Currency)]
+        [Range(1, 1000, ErrorMessage = "Rate must be between 1 and 1000.")]
+        public decimal HourlyRate { get; set; }
 
-        [NotMapped]
-        public decimal Total => (decimal)HoursWorked * HourlyRate; // calculated on the fly
+        // NEW: Field for the auto-calculated total
+        [Display(Name = "Total Amount")]
+        [DataType(DataType.Currency)]
+        public decimal TotalAmount { get; set; }
 
         public string? Notes { get; set; }
 
-        // stored filename relative to wwwroot/uploads
-        public string? DocumentFileName { get; set; }
+        [Display(Name = "Submitted Date")]
+        public DateTime SubmittedDate { get; set; }
 
-        public ClaimStatus Status { get; set; } = ClaimStatus.Pending;
+        public ClaimStatus Status { get; set; }
 
-        public DateTime SubmittedAt { get; set; } = DateTime.UtcNow;
+        [Display(Name = "Supporting Document")]
+        public string? DocumentName { get; set; }
 
-        // public for EF and view binding
-        public int SubmittedByUserId { get; set; }
-        public int ClaimID { get; internal set; }
+        public string? UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser? User { get; set; }
+
+
     }
 }
 
