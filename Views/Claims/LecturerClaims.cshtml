@@ -23,9 +23,9 @@
                 <td>@c.TotalAmount.ToString("C")</td>
                 <td>@c.Status</td>
                 <td>
-                    @if (!string.IsNullOrEmpty(c.DocumentFileName))
+                    @if (!string.IsNullOrEmpty(c.DocumentName))
                     {
-                        <a href="/Claims/DownloadDocument?fileName=@c.DocumentFileName">Download</a>
+                        <a href="/Claims/DownloadDocument?fileName=@c.DocumentName">Download</a>
                     }
                 </td>
             </tr>

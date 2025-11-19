@@ -5,14 +5,14 @@
 <h2>Review Claim #@Model.Id</h2>
 
 <div>
-    <p><strong>Lecturer:</strong> @Model.LecturerName (@Model.LecturerEmail)</p>
+    <p><strong>Lecturer:</strong> @Model.LecturerName (@Model.LecturerName)</p>
     <p><strong>Hours:</strong> @Model.HoursWorked</p>
     <p><strong>Rate:</strong> @Model.HourlyRate</p>
     <p><strong>Total:</strong> @Model.Total.ToString("C")</p>
     <p><strong>Notes:</strong> @Model.Notes</p>
-    @if (!string.IsNullOrEmpty(Model.DocumentFileName))
+    @if (!string.IsNullOrEmpty(Model.DocumentName))
     {
-        <p><a href="/Claims/DownloadDocument?fileName=@Model.DocumentFileName">Open Document</a></p>
+        <p><a href="/Claims/DownloadDocument?fileName=@Model.DocumentName">Open Document</a></p>
     }
 </div>
 

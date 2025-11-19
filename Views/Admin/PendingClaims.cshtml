@@ -12,14 +12,14 @@
         {
             <tr>
                 <td>@c.Id</td>
-                <td>@c.LecturerName<br /><small>@c.LecturerEmail</small></td>
+                <td>@c.LecturerName<br /><small>@c.LecturerName</small></td>
                 <td>@c.Total.ToString("C")</td>
-                <td>@c.SubmittedAt.ToLocalTime().ToString("g")</td>
+                <td>@c.SubmittedDate.ToLocalTime().ToString("g")</td>
                 <td>
                     <a class="btn btn-sm btn-primary" href="/Admin/Approve/@c.Id">Review</a>
-                    @if (!string.IsNullOrEmpty(c.DocumentFileName))
+                    @if (!string.IsNullOrEmpty(c.DocumentName))
                     {
-                        <a class="btn btn-sm btn-link" href="/Claims/DownloadDocument?fileName=@c.DocumentFileName">Doc</a>
+                        <a class="btn btn-sm btn-link" href="/Claims/DownloadDocument?fileName=@c.DocumentName">Doc</a>
                     }
                 </td>
             </tr>
