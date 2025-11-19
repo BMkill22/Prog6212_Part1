@@ -145,19 +145,22 @@ namespace Part1.Controllers
             return View(user);
         }
 
-        [HttpPost]
         [Authorize(Roles = "HR")]
-        public async Task<IActionResult> EditLecturer(ApplicationUser updatedUser)
+        public async Task<IActionResult> EditLecturer(Part1.Models.ApplicationUser updatedUser)
         {
-            var user = await _userManager.FindByIdAsync(updatedUser.Id);
+            // The fix: We add .ToString() to handle the ID correctly
+            var user = await _userManager.FindByIdAsync(updatedUser.Id.ToString());
+
             if (user != null)
             {
                 user.FullName = updatedUser.FullName;
                 user.Email = updatedUser.Email;
                 user.PhoneNumber = updatedUser.PhoneNumber;
+
                 await _userManager.UpdateAsync(user);
                 return RedirectToAction("LecturerDirectory");
             }
+
             return View(updatedUser);
         }
     }
