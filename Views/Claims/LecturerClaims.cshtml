@@ -18,8 +18,9 @@
             <tr>
                 <td><a href="/Claims/Details/@c.Id">@c.Id</a></td>
                 <td>@c.HoursWorked</td>
+                <td>@c.SubmittedDate.ToShortDateString()</td>
                 <td>@c.HourlyRate</td>
-                <td>@c.Total.ToString("C")</td>
+                <td>@c.TotalAmount.ToString("C")</td>
                 <td>@c.Status</td>
                 <td>
                     @if (!string.IsNullOrEmpty(c.DocumentFileName))

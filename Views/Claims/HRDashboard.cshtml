@@ -29,6 +29,8 @@
                 <td>@item.HoursWorked</td>
                 <td>@item.HourlyRate.ToString("C")</td>
                 <td class="fw-bold">@item.TotalAmount.ToString("C")</td>
+                <td>@item.User?.FullName</td>
+                <td>@item.SubmittedDate.ToLocalTime()</td>
                 <td><span class="badge bg-success">Ready for Payment</span></td>
             </tr>
         }

@@ -27,8 +27,9 @@ else
                     <td>@c.LecturerName</td>
                     <td>@(c.Total.ToString("C"))</td>
                     <td>@c.Status</td>
-                    <td>@c.SubmittedAt.ToLocalTime().ToString("g")</td>
+                    <td>@c.SubmittedDate.ToString("g")</td>
                 </tr>
+
             }
         </tbody>
     </table>

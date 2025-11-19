@@ -30,8 +30,15 @@
                         <button>Approve</button>
                         <button>Reject</button>
                     </td>
+                    <td>
+                    <td>@claim.SubmittedDate.ToShortDateString()</td>
+                    <td>@claim.TotalAmount.ToString("C")</td>
+                    <td>@claim.DocumentName</td>
+                    </td>
                 </tr>
             }
+
+
         </tbody>
     </table>
 </section>

@@ -30,6 +30,11 @@ namespace Part1.Models
 
         public ClaimStatus Status { get; set; }
 
+        public ClaimStatus Total { get; set; }
+
+        public ClaimStatus LecturerName { get; set; }
+        
+
         [Display(Name = "Supporting Document")]
         public string? DocumentName { get; set; }
 
@@ -37,8 +42,7 @@ namespace Part1.Models
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser? User { get; set; }
-
-
+        public object SubmittedAt { get; internal set; }
     }
 }
 
