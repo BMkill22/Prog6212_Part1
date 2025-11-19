@@ -1,27 +1,30 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Part1</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Part1.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <h1>Contract Monthly Claim System</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/Lecturer">Lecturer Page</a>
-            <a href="/Manager">Manager Page</a>
-            <a href="/Claims">Claims</a>
-            <a href="/Program">Program Coordinator</a>
-        </nav>
-    </header>
-        <main>
-            @RenderBody()
-        </main>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+﻿@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Lecturer"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Claim" asp-action="Create">Submit Claim</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Claim" asp-action="Index">My Claims</a>
+        </li>
+    }
+
+    if (User.IsInRole("Manager"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Claim" asp-action="ManagerView">Manager Dashboard</a>
+        </li>
+    }
+
+    // NEW: HR Link
+    if (User.IsInRole("HR"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Claim" asp-action="HRDashboard">HR Invoices</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Claim" asp-action="LecturerDirectory">Manage Lecturers</a>
+        </li>
+    }
+}

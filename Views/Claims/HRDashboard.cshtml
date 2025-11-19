@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Part1.Models.Claim>
+@{
+    ViewData["Title"] = "HR Invoices";
+}
+
+<h2>Approved Claims (Payment Invoice Generation)</h2>
+<p>The following claims have been approved and are ready for payment processing.</p>
+<hr />
+
+<button onclick="window.print()" class="btn btn-secondary mb-3">Print Invoice / Report</button>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Lecturer</th>
+            <th>Date Approved</th>
+            <th>Hours</th>
+            <th>Rate</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.User?.FullName</td>
+                <td>@item.SubmittedDate.ToShortDateString()</td>
+                <td>@item.HoursWorked</td>
+                <td>@item.HourlyRate.ToString("C")</td>
+                <td class="fw-bold">@item.TotalAmount.ToString("C")</td>
+                <td><span class="badge bg-success">Ready for Payment</span></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-end fw-bold">Grand Total:</td>
+            <td class="fw-bold">@Model.Sum(i => i.TotalAmount).ToString("C")</td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>

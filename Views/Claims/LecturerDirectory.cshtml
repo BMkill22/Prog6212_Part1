@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Part1.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Lecturer Directory";
+}
+
+<h2>Lecturer Data Management</h2>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.FullName</td>
+                <td>@user.PhoneNumber</td>
+                <td>
+                    <a asp-action="EditLecturer" asp-route-id="@user.Id" class="btn btn-sm btn-warning">Edit Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
